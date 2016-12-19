@@ -1,23 +1,77 @@
 #pragma once
 
-
-class router
+class Router
 {
-
 public:
+	// Constructor 
+	Router();
+
+	// GET Functions
+	int getRouterID()
+	{
+		return router_ID;
+	}
+	std::string getNetworkName()
+	{
+		return network_name;
+	}
+	bool isShutDown()
+	{
+		return ShutDownFlag;
+	}
+	std::vector<std::tuple<std::string, int, int>> getRoutingTable()
+	{
+		return routing_table;
+	}
+
+	// SET Functions
+	void SetRouterStatus(bool request)
+	{
+		ShutDownFlag = request;
+	}
+	void InsertRoutingTable(std::string network, int cost, int outgoingLink)
+	{
+		routing_table.push_back(std::tuple<std::string, int, int>(network, cost, outgoingLink));
+	}
+	void SetRouterID(int routerID)
+	{
+		router_ID = routerID;
+	}
+	void SetNetworkName(std::string networkName)
+	{
+		network_name = networkName;
+	}
+	void ClearObject()
+	{
+		router_ID = NULL;
+		network_name = "";
+		routing_table.clear();
+	}
+
+	// Other functions
 	void receivePacket()
 	{
 
 	}
-
 	void originatePacket()
 	{
 
 	}
-private:
 
+private:
+	int router_ID;
+	std::string network_name;
+	bool ShutDownFlag = false;
+	// Network, Cost, Outgoing Link
+	std::vector <std::tuple<std::string, int, int>> routing_table;
 };
 
+inline Router::Router()
+{
+	router_ID = -1;
+}
+
+/*
 class LSP
 {
 
@@ -30,3 +84,5 @@ private:
 
 
 };
+
+*/
