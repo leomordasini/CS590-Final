@@ -147,13 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="graph.h" />
-    <ClInclude Include="NetworkInterface.h" />
+    <ClInclude Include="Router.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="infile.dat" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="final.cpp" />
+    <ClCompile Include="entrypoint.cpp" />
+    <ClCompile Include="Router.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

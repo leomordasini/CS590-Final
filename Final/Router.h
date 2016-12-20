@@ -1,10 +1,17 @@
 #pragma once
+#include <string>
+#include <vector>
+#include <tuple>
+
 
 class Router
 {
 public:
 	// Constructor 
-	Router();
+	Router()
+	{
+		router_ID = -1;
+	};
 
 	// GET Functions
 	int getRouterID()
@@ -66,10 +73,7 @@ private:
 	std::vector <std::tuple<std::string, int, int>> routing_table;
 };
 
-inline Router::Router()
-{
-	router_ID = -1;
-}
+
 
 /*
 class LSP

@@ -5,7 +5,7 @@
 #include <tuple>
 #include <regex>
 #include <vector>
-#include "NetworkInterface.h"
+#include "Router.h"
 //#include "Graph.h"
 
 void GenerateRoutersFromInput(std::vector<Router> & RouterList)
@@ -108,3 +108,18 @@ int main()
 
 	return 0;
 }
+/*
+ *
+ * Devinder's Notes: temporary
+ * 
+ *  Goal:  create a virtual network of routers that send routing data to one another.
+ * 
+ * 1. Routers should be a class
+ *  a. maintain a data struc that stores references to other "directly connected routers"
+ *  should have etters and setters for ID and link cost
+ *  
+ *  Routers will EXCHANEGe necessary info to build routing table.
+ *  Each router will advertise access to a particular named network. , string
+ *  
+ *  Also need an undirected graph of the network as the router understands it.
+ */
