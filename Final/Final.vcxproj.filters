@@ -27,6 +27,9 @@
     <ClInclude Include="InputValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LinkStatePacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="infile.dat">
@@ -44,6 +47,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkStatePacket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

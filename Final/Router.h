@@ -17,80 +17,109 @@ public:
 	// Constructor 
 	Router();
 
+	Router(int a_routerID, std::string a_routerName, int a_networkCost);
+
+
 
 
 	// GET Functions
 	int getRouterID()
 	{
-		return router_ID;
+		return m_routerId;
 	}
-	std::string getNetworkName()
+	std::string GetNetworkName()
 	{
-		return network_name;
+		return m_networkName;
 	}
-	bool isShutDown()
+	bool IsShutDown()
 	{
-		return ShutDownFlag;
+		return m_shutdownFlag;
 	}
-	std::vector<std::tuple<std::string, int, int>> getRoutingTable()
+
+	//grt Routing table
+	std::vector<std::tuple<std::string, int, int>> GetRoutingTable()
 	{
-		return routing_table;
+		return m_routingTable;
 	}
+
 
 	// SET Functions
 	void SetRouterStatus(bool request)
 	{
-		ShutDownFlag = request;
+		m_shutdownFlag = request;
 	}
+
 	void InsertRoutingTable(std::string network, int cost, int outgoingLink)
 	{
-		routing_table.push_back(std::tuple<std::string, int, int>(network, cost, outgoingLink));
+
+		m_routingTable.push_back(std::tuple<std::string, int, int>(network, cost, outgoingLink));
 	}
-	void SetRouterID(int routerID)
+
+	void InsertConnectedRouterInfo(std::pair<int,int> a_tempPair)
 	{
-		router_ID = routerID;
+
+		m_connectedRouterIdCost.push_back(a_tempPair);
 	}
-	void SetNetworkName(std::string networkName)
-	{
-		network_name = networkName;
-	}
+
+
+
+
 	void ClearObject();
 	// Other functions
 	void receivePacket();
 	void originatePacket();
 
 private:
-	int router_ID;
 
-	std::string network_name;
+	void SetRouterID(int routerID)
+	{
+		m_routerId = routerID;
+	}
+	void SetNetworkName(std::string networkName)
+	{
+		m_networkName = networkName;
+	}
 
-	bool ShutDownFlag = false;
+	void SetNetworkCost(int a_networkCost)
+	{
+		m_networkCost = a_networkCost;
+	}
+
+
+	//defaullt vals.
+	int m_routerId = -1;
+	std::string m_networkName = "none";
+	int m_networkCost = -1;
+
+	bool m_shutdownFlag = false;
 
 
 	//DirectlyConnectedRouters
-	//note when using this, say Idcost nameofit (1,1) followerd by map.inset(std::make_pair( nameofit, RouterPointer);
+	//note when using this, say Idcost nameofit (1,1) followerd by map.insert(std::make_pair( nameofit, RouterPointer);
 	// Network, Cost, Outgoing Link
 	std::map<IdCost, Router*> DirectlyConnectedRouters;
 
+	std::vector<std::pair<int,int>> m_connectedRouterIdCost;
+
 
 	
-	std::vector <std::tuple<std::string, int, int>> routing_table;
+	std::vector <std::tuple<std::string, int, int>> m_routingTable;
 };
 
 
 
-/*
-class LSP
-{
+/**
 
-public:
+* 1. Routers should be a class <--working on this now.
+*   a. maintain a data struct that stores references to other "directly connected routers",
+*      which can be referenced by id, along with the cost of the link.
+*      should have etters and setters for ID and cost?
+*   b. Routers will exchangee necessary info to build routing table.
+*   c. Each router will advertise access to a particular named network. which is a string that should
+*      be stored in that router class
+*   d. will need to store other information in the Router cllass to enable the remainder of the algorithm
+*      to work, such as an undirected graph to representing the network of routers as the router currently
+*      understands
+*   e. Also need an undirected graph of the network as the router understands it.
 
-private:
-	std::string ID;
-	int sequence;
-	int TTL = 10;
-
-
-};
-
-*/
+**/

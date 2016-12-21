@@ -1,9 +1,5 @@
 #include <string>
 #include <iostream>
-#include <sstream>
-#include <fstream>
-#include <tuple>
-#include <regex>
 #include <vector>
 
 #include "Router.h"
@@ -11,102 +7,23 @@
 #include "InputValidator.h"
 //#include "Graph.h"
 
-void GenerateRoutersFromInput(std::vector<Router> & RouterList)
-{
-	std::ifstream input_file("infile.dat");
-	std::string line;
-	Router tempRouter;
-	int tempRouterID;
-	int tempOutgoingLink;
-	int tempcost;
-	std::string tempNetwork;
 
-	// Read in infile.dat file, create and initialize routers
-	while (std::getline(input_file, line))
-	{
-		std::istringstream iss(line);
 
-		// Check if first character is not a space (initial declaration of router)
-		if (!isspace(line.at(0)))
-		{
-			// Push previous router onto vector
-			if (tempRouter.getRouterID() != -1)
-			{
-				RouterList.push_back(tempRouter);
-				tempRouter.ClearObject();
-			}
-			// Parse line and insert new router info into new Router Object
-			iss >> tempRouterID >> tempNetwork;
-			tempRouter.SetRouterID(tempRouterID);
-			tempRouter.SetNetworkName(tempNetwork);
-		}
-		else
-		{
-			iss >> tempOutgoingLink >> tempcost;
-			tempRouter.InsertRoutingTable(tempNetwork, tempcost, tempOutgoingLink);
-		}
-	}
-};
 
-void AskUserForInput(std::vector<Router> & RouterList)
-{
-	std::cout << "Please enter one of the following commands:" << std::endl << std::endl;
-	std::cout << "[C] - Continue" << std::endl << "[Q] - Quit" << std::endl << "[P#] - Print the routing table of a router (replace # with Router ID)"
-		<< std::endl << "[S#] - Shutdown a router (replace # with Router ID)" << std::endl << "[T#] - Startup a router (replace # with Router ID)" << std::endl;
-
-	std::string UserInput;
-	std::cin >> UserInput;
-
-	if (UserInput == "C")
-	{
-		std::cout << "Still need to implement this piece" << std::endl;
-	}
-	else if (UserInput == "Q")
-	{
-		exit(0);
-	}
-	else if (UserInput == "P")
-	{
-		// Print out vector content
-		for (auto i = 0; i < RouterList.size(); i++)
-		{
-			std::cout << RouterList[i].getNetworkName() << std::endl;
-			std::vector <std::tuple<std::string, int, int>> tempRoutingTable;
-			tempRoutingTable = RouterList[i].getRoutingTable();
-
-			for (const auto& j : tempRoutingTable)
-			{
-				std::cout << "Network: " << std::get<0>(j) << " Cost: " << std::get<1>(j) << " OutGoing Link: " << std::get<2>(j) << std::endl;
-			}
-		}
-	}
-	else if (UserInput == "S#")
-	{
-		std::cout << "Still need to implement this piece" << std::endl;
-	}
-	else if (UserInput == "T#")
-	{
-		std::cout << "Still need to implement this piece" << std::endl;
-	}
-	else
-	{
-		std::cout << "You entered an invalid input. Please try again" << std::endl;
-	}
-}
 
 int main()
 {
 	//// Create Vector of Routers
-	//std::vector <Router> RouterList;
+	std::vector <std::shared_ptr<Router>> RouterList;
 
 	//// Generate Routers from Input file
-	//GenerateRoutersFromInput(RouterList);
+	GenerateRoutersFromInput(RouterList);
 
 	//// Ask User for Input
-	//while (true)
-	//{
-	//	AskUserForInput(RouterList);
-	//}
+	while (true)
+	{
+		AskUserForInput(RouterList);
+	}
 	//
 
 	//testing area. temporary while i test things.
@@ -138,7 +55,6 @@ int main()
  *      to work, such as an undirected graph to representing the network of routers as the router currently
  *      understands 
  *   e. Also need an undirected graph of the network as the router understands it.
-it
  * 
  * 2. Implement the "link state routing algorithm. They work by sending a "link state packet" 
  *    around the network with routers forwarding the packet "as appropriate"
@@ -185,8 +101,8 @@ it
  *        graph using an adjacency matrics or using and adjacent list. )
  *        
  * 6. The initial network will be set up by reading in a file, infile.dat, that has the following format:
- *	  [router-id][network-name][network-cost]
- *	   [directly-linked-router-id][link-cost]
+ *	  [router-id][network-name][network-cost] <-- Make router if no space
+ *	   [directly-linked-router-id][link-cost] <-- add stuff to router
  *	   [directly-linked-router-id][link-cost]
  *	   [directly-linked-router-id][link-cost]
  *	   etc....
@@ -210,6 +126,7 @@ it
  *	   iii. print the routing table of a router ("P" followed by the router's id number)
  *	   iv.  shut down a router (enter "S" followed by the id number).
  *	   v.   startup up a router (enter "T" followed by the id number).
+ *	   
  *	 c. If the user chooses to continue, you should call teh originatePacket() function on every router
  *		in whatever order you choose. Then prompt again.
  *	 d. If the user shuts down a router, change the router object so that it does not send out any LSP or 

@@ -2,14 +2,22 @@
 
 Router::Router()
 {
-		router_ID = -1;
+	
 }
+
+Router::Router(int a_routerID, std::string a_networkName, int a_networkCost)
+{
+	SetRouterID(a_routerID);
+	SetNetworkName(a_networkName);
+	SetNetworkCost(a_networkCost);
+}
+
 
 void Router::ClearObject()
 {
-	router_ID = NULL;
-	network_name = "";
-	routing_table.clear();
+	m_routerId = NULL;
+	m_networkName = "";
+	m_routingTable.clear();
 }
 
 void Router::receivePacket()
