@@ -1,9 +1,6 @@
 #include "Router.h"
 
-Router::Router()
-{
-	
-}
+
 
 Router::Router(int a_routerID, std::string a_networkName, int a_networkCost)
 {

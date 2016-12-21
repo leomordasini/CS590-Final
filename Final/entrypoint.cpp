@@ -19,6 +19,13 @@ int main()
 	//// Generate Routers from Input file
 	GenerateRoutersFromInput(RouterList);
 
+	//after the list is made, you might want to give a reference to the router list to each router so they can be referenced down the line.
+
+	for (auto &router: RouterList)
+	{
+		router->SetRouterListReference(& RouterList);
+	}
+
 	//// Ask User for Input
 	while (true)
 	{
@@ -63,7 +70,7 @@ int main()
  *   a. ID of the router that originates the LSP <-WORKS
  *   b. A sequence number indicating how many LSPs have been sent by the originating router; ie each newly
  *      origninated LSP has a higher sequence number should be 1. Igore the possibility of wraparound. <-WORKS
- *   c. Time to live, devremented each time the LSP is forwarded, with an initial value of 10. <-WORKS
+ *   c. Time to live, decremented each time the LSP is forwarded, with an initial value of 10. <-WORKS
  *   
  *   d. Either of the following: <-- NOT SURE HOW TO APPROACH THIS YET
  * 	   i. A list that indicates each reachable network (indicated by the networkk name stored in the 

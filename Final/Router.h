@@ -4,6 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <map>
+#include <memory>
 
 
 class Router
@@ -70,6 +71,11 @@ public:
 		m_connectedRouterIdCost.push_back(a_tempPair);
 	}
 
+	void SetRouterListReference(std::vector <std::shared_ptr<Router>> * a_RouterList)
+	{
+		m_routerListReference = a_RouterList;
+	}
+
 
 
 
@@ -78,8 +84,10 @@ public:
 	void receivePacket();
 	void originatePacket();
 
+	
+
 private:
-	Router();
+	
 
 	void SetTick(int tick) //might not use this at all.
 	{
@@ -114,10 +122,12 @@ private:
 	
 	bool m_shutdownFlag = false;
 
+	std::vector <std::shared_ptr<Router>> * m_routerListReference;
 	//DirectlyConnectedRouters
 	//note when using this, say Idcost nameofit (1,1) followerd by map.insert(std::make_pair( nameofit, RouterPointer);
 	// Network, Cost, Outgoing Link
 	//std::map<IdCost, Router*> DirectlyConnectedRouters;
+
 
 	std::vector<std::pair<int,int>> m_connectedRouterIdCost;
 
