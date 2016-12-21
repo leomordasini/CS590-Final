@@ -1,4 +1,5 @@
 #pragma once
+// ReSharper disable CppUnusedIncludeDirective
 #include <string>
 #include <vector>
 #include <tuple>
@@ -8,10 +9,9 @@ class Router
 {
 public:
 	// Constructor 
-	Router()
-	{
-		router_ID = -1;
-	};
+	Router();
+
+
 
 	// GET Functions
 	int getRouterID()
@@ -48,22 +48,10 @@ public:
 	{
 		network_name = networkName;
 	}
-	void ClearObject()
-	{
-		router_ID = NULL;
-		network_name = "";
-		routing_table.clear();
-	}
-
+	void ClearObject();
 	// Other functions
-	void receivePacket()
-	{
-
-	}
-	void originatePacket()
-	{
-
-	}
+	void receivePacket();
+	void originatePacket();
 
 private:
 	int router_ID;
