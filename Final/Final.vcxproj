@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="FileAccess.h" />
     <ClInclude Include="graph.h" />
+    <ClInclude Include="InputValidator.h" />
     <ClInclude Include="Router.h" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="entrypoint.cpp" />
     <ClCompile Include="FileAccess.cpp" />
+    <ClCompile Include="InputValidator.cpp" />
     <ClCompile Include="Router.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

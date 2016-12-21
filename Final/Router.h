@@ -3,11 +3,17 @@
 #include <string>
 #include <vector>
 #include <tuple>
+#include <map>
 
 
 class Router
 {
+
+	typedef std::pair<int,int> IdCost;
 public:
+
+	
+
 	// Constructor 
 	Router();
 
@@ -55,9 +61,19 @@ public:
 
 private:
 	int router_ID;
+
 	std::string network_name;
+
 	bool ShutDownFlag = false;
+
+
+	//DirectlyConnectedRouters
+	//note when using this, say Idcost nameofit (1,1) followerd by map.inset(std::make_pair( nameofit, RouterPointer);
 	// Network, Cost, Outgoing Link
+	std::map<IdCost, Router*> DirectlyConnectedRouters;
+
+
+	
 	std::vector <std::tuple<std::string, int, int>> routing_table;
 };
 

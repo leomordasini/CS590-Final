@@ -5,7 +5,10 @@
 #include <tuple>
 #include <regex>
 #include <vector>
+
 #include "Router.h"
+#include "FileAccess.h"
+#include "InputValidator.h"
 //#include "Graph.h"
 
 void GenerateRoutersFromInput(std::vector<Router> & RouterList)
@@ -93,18 +96,28 @@ void AskUserForInput(std::vector<Router> & RouterList)
 
 int main()
 {
-	// Create Vector of Routers
-	std::vector <Router> RouterList;
+	//// Create Vector of Routers
+	//std::vector <Router> RouterList;
 
-	// Generate Routers from Input file
-	GenerateRoutersFromInput(RouterList);
+	//// Generate Routers from Input file
+	//GenerateRoutersFromInput(RouterList);
 
-	// Ask User for Input
-	while (true)
-	{
-		AskUserForInput(RouterList);
-	}
-	
+	//// Ask User for Input
+	//while (true)
+	//{
+	//	AskUserForInput(RouterList);
+	//}
+	//
+
+	//testing area. temporary while i test things.
+
+	//test if i can split a string with spaces/tabs.
+	std::string splitThisForMe = "I    don't \t\t care that\t you say this.";
+	std::vector<std::string> shouldHavesplitNicely = splitThisString(splitThisForMe);
+
+
+
+	std::cout << "all done" << std::endl;
 
 	return 0;
 }
@@ -117,11 +130,11 @@ int main()
  * 1. Routers should be a class <--working on this now.
  *   a. maintain a data struct that stores references to other "directly connected routers",
  *      which can be referenced by id, along with the cost of the link.
- *      should have etters and setters for ID and link cost?
+ *      should have etters and setters for ID and cost?
  *   b. Routers will exchangee necessary info to build routing table.
  *   c. Each router will advertise access to a particular named network. which is a string that should 
  *      be stored in that router class
- *   d. will need to store other information in the oruter cllass to enable the remainder of the algorithm 
+ *   d. will need to store other information in the Router cllass to enable the remainder of the algorithm 
  *      to work, such as an undirected graph to representing the network of routers as the router currently
  *      understands 
  *   e. Also need an undirected graph of the network as the router understands it.
@@ -141,7 +154,7 @@ it
  *	      and its cost.
  *	   ii. A  list that indicates each directly connected router, the network behind each one, 
  *		   and the cost to get to that router. <- looks better
- * 3. The router class should contain a function/method named something similar to 
+ * 3. The Router class should contain a function/method named something similar to 
  *    receievePacket that should take as its only argument an instance of the link state packet class.
  *    
  *   a. A router thtat receives an LSP should first decrement the LSP's TTL. Next the receiving router

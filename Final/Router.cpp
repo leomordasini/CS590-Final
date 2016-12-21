@@ -14,8 +14,10 @@ void Router::ClearObject()
 
 void Router::receivePacket()
 {
+
 }
 
 void Router::originatePacket()
 {
+
 }
