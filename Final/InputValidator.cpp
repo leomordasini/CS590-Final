@@ -50,10 +50,15 @@ void GenerateRoutersFromInput(std::vector <std::shared_ptr<Router>> & a_RouterLi
 
 			//bool testValidity;
 			//testValidity = iss >> tempNetworkCost;
-			if (!iss >> tempNetworkCost)
+			if (iss >> tempNetworkCost)
 			{
-				tempNetworkCost == 1;
+				
 			}
+			else
+			{
+				tempNetworkCost = 1;
+			}
+				
 
 			tempRouterPtr.reset(new Router(tempRouterID, tempNetworkName, tempNetworkCost));
 
@@ -69,10 +74,16 @@ void GenerateRoutersFromInput(std::vector <std::shared_ptr<Router>> & a_RouterLi
 
 			iss >> tempLinkedRouterId;
 
-			if (!iss >> tempLinkCost)
+			if (iss >> tempLinkCost)
 			{
-				tempLinkCost == 1;
+
 			}
+			else
+			{
+				tempLinkCost = 1;
+			}
+
+
 			std::pair<int, int> idcost(tempLinkedRouterId, tempLinkCost);
 			tempRouterPtr->InsertConnectedRouterInfo(idcost);
 
@@ -113,7 +124,7 @@ void AskUserForInput(std::vector <std::shared_ptr<Router>> & a_RouterList)
 	}
 	else if (UserInput == "P")
 	{
-		confirmOverZero(routerID, "router id was not an int");
+		confirmOverZero(routerID, "Making sure the router id is int...");
 		std::cout << "Printing procedure will go here" << std::endl;
 
 		//this will be useful soon as we have Dijkstra working.
@@ -135,13 +146,13 @@ void AskUserForInput(std::vector <std::shared_ptr<Router>> & a_RouterList)
 	}
 	else if (UserInput == "S")
 	{
-		confirmOverZero(routerID, "router id was not an int");
+		confirmOverZero(routerID, "Making sure the router id is int...");
 
 		std::cout << "shut down procedure goes here" << std::endl;
 	}
 	else if (UserInput == "T")
 	{
-		confirmOverZero(routerID, "router id was not an int");
+		confirmOverZero(routerID, "Making sure the router id is int...");
 
 		std::cout << "startup procedure goes here" << std::endl;
 	}

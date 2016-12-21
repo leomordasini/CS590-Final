@@ -3,11 +3,10 @@
 //Keeps them in a nice interface/implementation format and out of my entrypoint
 
 #include <string>
-#include <sstream>
+
 #include <algorithm>
 #include <vector>
 #include <iterator>
-#include <iostream>
 #include "Router.h"
 #include <string>
 #include <memory>
@@ -15,6 +14,9 @@
 #include<ctype.h>
 #include<numeric>
 #include <iomanip>
+#include <sstream>
+#include <iostream>
+
 //might need limits here..
 
 

@@ -12,18 +12,14 @@ class Router
 	typedef std::pair<int,int> IdCost;
 public:
 
-	
-
 	// Constructor 
-	Router();
-
 	Router(int a_routerID, std::string a_routerName, int a_networkCost);
 
 
 
 
 	// GET Functions
-	int getRouterID()
+	int GetRouterID()
 	{
 		return m_routerId;
 	}
@@ -36,11 +32,24 @@ public:
 		return m_shutdownFlag;
 	}
 
-	//grt Routing table
+	//get Routing table
 	std::vector<std::tuple<std::string, int, int>> GetRoutingTable()
 	{
 		return m_routingTable;
 	}
+
+	int GetTick() const
+	{
+		return m_tick;
+	}
+
+	int getLSPCounter() const
+	{
+		return m_LSPCounter;
+	}
+
+
+
 
 
 	// SET Functions
@@ -70,6 +79,17 @@ public:
 	void originatePacket();
 
 private:
+	Router();
+
+	void SetTick(int tick) //might not use this at all.
+	{
+		m_tick = tick;
+	}
+
+	void SetLSPCounter(int lsp_counter)
+	{
+		m_LSPCounter = lsp_counter;
+	}
 
 	void SetRouterID(int routerID)
 	{
@@ -85,19 +105,19 @@ private:
 		m_networkCost = a_networkCost;
 	}
 
-
 	//defaullt vals.
 	int m_routerId = -1;
 	std::string m_networkName = "none";
 	int m_networkCost = -1;
-
+	int m_tick;
+	int m_LSPCounter;
+	
 	bool m_shutdownFlag = false;
-
 
 	//DirectlyConnectedRouters
 	//note when using this, say Idcost nameofit (1,1) followerd by map.insert(std::make_pair( nameofit, RouterPointer);
 	// Network, Cost, Outgoing Link
-	std::map<IdCost, Router*> DirectlyConnectedRouters;
+	//std::map<IdCost, Router*> DirectlyConnectedRouters;
 
 	std::vector<std::pair<int,int>> m_connectedRouterIdCost;
 

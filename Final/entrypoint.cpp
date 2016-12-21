@@ -60,11 +60,12 @@ int main()
  *    around the network with routers forwarding the packet "as appropriate"
  *    We will simulate this packet with instances of another class, that will contain the following info:
  * LSP CLASS:
- *   a. ID of the router that originates the LSP
+ *   a. ID of the router that originates the LSP <-WORKS
  *   b. A sequence number indicating how many LSPs have been sent by the originating router; ie each newly
- *      origninated LSP has a higher sequence number should be 1. Igore the possibility of wraparound.
- *   c. Time to live, devremented each time the LSP is forwarded, with an initial value of 10.
- *   d. Either of the following:
+ *      origninated LSP has a higher sequence number should be 1. Igore the possibility of wraparound. <-WORKS
+ *   c. Time to live, devremented each time the LSP is forwarded, with an initial value of 10. <-WORKS
+ *   
+ *   d. Either of the following: <-- NOT SURE HOW TO APPROACH THIS YET
  * 	   i. A list that indicates each reachable network (indicated by the networkk name stored in the 
  *	      router's string)
  *	      and its cost.
@@ -100,7 +101,7 @@ int main()
  *       (Consider the advantages and disadwantages of implementing the
  *        graph using an adjacency matrics or using and adjacent list. )
  *        
- * 6. The initial network will be set up by reading in a file, infile.dat, that has the following format:
+ * 6. The initial network will be set up by reading in a file, infile.dat, that has the following format: <-- DONE
  *	  [router-id][network-name][network-cost] <-- Make router if no space
  *	   [directly-linked-router-id][link-cost] <-- add stuff to router
  *	   [directly-linked-router-id][link-cost]
@@ -125,7 +126,7 @@ int main()
  *	   ii.  quit( enter "Q") 
  *	   iii. print the routing table of a router ("P" followed by the router's id number)
  *	   iv.  shut down a router (enter "S" followed by the id number).
- *	   v.   startup up a router (enter "T" followed by the id number).
+ *	   v.   startup up a router (enter "T" followed by the id number). <--- DONE UP 
  *	   
  *	 c. If the user chooses to continue, you should call teh originatePacket() function on every router
  *		in whatever order you choose. Then prompt again.
