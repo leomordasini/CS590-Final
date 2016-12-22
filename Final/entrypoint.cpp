@@ -5,7 +5,7 @@
 #include "Router.h"
 #include "FileAccess.h"
 #include "InputValidator.h"
-//#include "Graph.h"
+#include "Graph.h"
 
 
 
@@ -27,10 +27,10 @@ int main()
 	}
 
 	//// Ask User for Input
-	while (true)
-	{
-		AskUserForInput(RouterList);
-	}
+	//while (true)
+	//{
+	//	AskUserForInput(RouterList);
+	//}
 	//
 
 	//testing area. temporary while i test things.
@@ -41,6 +41,45 @@ int main()
 
 
 
+
+
+	//test for graph functionality -- this should let you be sure that this works.
+
+	std::cout << "modified work of : Mahmut Bulut" << std::endl << std::endl;
+	int seq = 0;
+	int init_node = 0;
+	int dest_node = 6;
+
+	Graph g;
+
+
+	g.add_vertex(0, { { 1, connectedRouter(1,1) },{ 2, connectedRouter(2,4) },{ 5, connectedRouter(5,2) } });
+
+	g.add_vertex(1, { { 4, connectedRouter(4,2) } });
+
+	g.add_vertex(2, { { 6, connectedRouter(6,2) },{ 3, connectedRouter(3,4) } });
+
+	g.add_vertex(3, {});
+
+	g.add_vertex(4, { { 3, connectedRouter(3,3) } });
+
+	g.add_vertex(5, { { 2, connectedRouter(2,1) },{ 6, connectedRouter(6,4) } });
+
+	g.add_vertex(6, { { 4, connectedRouter(4,5) } });
+
+
+
+
+	std::cout << "As initial node: " << init_node << std::endl;
+	std::cout << "As goal node: " << dest_node << std::endl;
+
+	for (int vertex : g.shortest_path(init_node, dest_node))
+	{
+		std::cout << "Solution path from goal sequence : " << seq << " Node : " << vertex << std::endl;
+		seq++;
+	}
+
+	std::cout << "Solution path from goal sequence : " << seq << " Node : " << init_node << std::endl;
 	std::cout << "all done" << std::endl;
 
 	return 0;
@@ -51,13 +90,13 @@ int main()
  * 
  *  Goal:  create a virtual network of routers that send routing data to one another.
  * 
- * 1. Routers should be a class <--working on this now.
- *   a. maintain a data struct that stores references to other "directly connected routers",
+ * 1. Routers should be a class 
+ *   a. maintain a data struct that stores references to other "directly connected routers", <-Done
  *      which can be referenced by id, along with the cost of the link.
  *      should have etters and setters for ID and cost?
- *   b. Routers will exchangee necessary info to build routing table.
+ *   b. Routers will exchangee necessary info to build routing table. <- LSP? I think so. Lets work this out.
  *   c. Each router will advertise access to a particular named network. which is a string that should 
- *      be stored in that router class
+ *      be stored in that router class <- have this.
  *   d. will need to store other information in the Router cllass to enable the remainder of the algorithm 
  *      to work, such as an undirected graph to representing the network of routers as the router currently
  *      understands 
@@ -72,12 +111,12 @@ int main()
  *      origninated LSP has a higher sequence number should be 1. Igore the possibility of wraparound. <-WORKS
  *   c. Time to live, decremented each time the LSP is forwarded, with an initial value of 10. <-WORKS
  *   
- *   d. Either of the following: <-- NOT SURE HOW TO APPROACH THIS YET
+ *   d. Either of the following: <-- NOT SURE HOW TO APPROACH THIS YET Creating Adjancency List and neighbours based on this.
  * 	   i. A list that indicates each reachable network (indicated by the networkk name stored in the 
  *	      router's string)
  *	      and its cost.
  *	   ii. A  list that indicates each directly connected router, the network behind each one, 
- *		   and the cost to get to that router. <- looks better
+ *		   and the cost to get to that router. <- looks better id, network, cost.
  * 3. The Router class should contain a function/method named something similar to 
  *    receievePacket that should take as its only argument an instance of the link state packet class.
  *    

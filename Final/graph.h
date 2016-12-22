@@ -1,43 +1,27 @@
 #pragma once
-#include <string>
+#include <unordered_map>
+#include <vector>
+#include <limits>
+#include <algorithm>
+#include <iostream>
 
-class Node
-{
-public:
-	Node(std::string name);
-private:
-	std::string name;
-};
 
-inline Node::Node(std::string name)
-{
-	name = name;
-}
 
-class Edge
-{
-public:
-	Edge(Node* source, Node* destination, double cost);
-private:
-	Node* source;
-	Node* destination;
-	double cost;
-
-};
-
-Edge::Edge(Node* source, Node* destination, double cost)
-{
-	source = source;
-	destination = destination;
-	cost = cost;
-}
-
+#include "InputValidator.h"
 class Graph
 {
 public:
-	void AddEdge();
-	void AddNode();
+	Graph();
+	~Graph();
 
-private:
+	void add_vertex(int a_routerId, const 	std::unordered_map<int, connectedRouter>& edges);
+
+
+	std::vector<int> shortest_path(int start, int finish);
+
+	std::unordered_map<int, const 	std::unordered_map<int, connectedRouter>> vertices;
+
+
 
 };
+

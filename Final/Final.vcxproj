@@ -147,7 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FileAccess.h" />
-    <ClInclude Include="graph.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="InputValidator.h" />
     <ClInclude Include="LinkStatePacket.h" />
     <ClInclude Include="Router.h" />
@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="entrypoint.cpp" />
     <ClCompile Include="FileAccess.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="InputValidator.cpp" />
     <ClCompile Include="LinkStatePacket.cpp" />
     <ClCompile Include="Router.cpp" />
